@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Çeviri Uygulaması</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Çeviri Uygulaması 🌐</h1>
+      <div class="translator-box">
+        <div class="language-selectors">
+          <div>
+            <label>Kaynak Dil:</label>
+            <select id="source_lang">
+              {% for code, name in languages.items() %}
+              <option value="{{ code }}">{{ name }} ({{ code }})</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div>
+            <label>Hedef Dil:</label>
+            <select id="target_lang">
+              {% for code, name in languages.items() %}
+              <option value="{{ code }}">{{ name }} ({{ code }})</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <textarea
+          id="input-text"
+          placeholder="Çevirmek istediğiniz metni buraya yazın..."
+        ></textarea>
+        <button onclick="translateText()">Çevir</button>
+        <div id="result"></div>
+      </div>
+    </div>
+
+    <script>
+      async function translateText() {
+        const text = document.getElementById("input-text").value;
+        const sourceLang = document.getElementById("source_lang").value;
+        const targetLang = document.getElementById("target_lang").value;
+        const resultDiv = document.getElementById("result");
+
+        if (!text) {
+          alert("Lütfen çevrilecek metni girin!");
+          return;
+        }
+
+        resultDiv.innerHTML = "Çevriliyor... ⏳";
+
+        try {
+          const response = await fetch("/translate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              text,
+              source_lang: sourceLang,
+              target_lang: targetLang,
+            }),
+          });
+
+          const data = await response.json();
+          if (data.error) {
+            resultDiv.innerHTML = `Hata: ${data.error}`;
+          } else {
+            resultDiv.innerHTML = `<strong>Çeviri:</strong> ${data.translated_text}`;
+          }
+        } catch (error) {
+          resultDiv.innerHTML = "Bir hata oluştu. Lütfen tekrar deneyin.";
+        }
+      }
+    </script>
+  </body>
+</html>

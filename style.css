@@ -1,0 +1,77 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212; /* Siyah zemin */
+  color: #e0e0e0; /* Metin rengi */
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  background: #1e1e1e; /* Koyu gri */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  text-align: center;
+  color: #00b894; /* Koyu yeşil */
+}
+
+.translator-box {
+  margin-top: 20px;
+}
+
+.language-selectors {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.language-selectors div {
+  flex: 1;
+}
+
+select,
+textarea,
+button {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #3c3c3c;
+  border-radius: 5px;
+  background-color: #2e2e2e; /* Daha koyu gri */
+  color: #e0e0e0;
+}
+
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+  border-color: #00b894;
+}
+
+button {
+  background-color: #0984e3; /* Mavi */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #74b9ff; /* Daha açık mavi */
+}
+
+#result {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #2d3436; /* Koyu yeşil */
+  border-radius: 5px;
+  color: #dfe6e9; /* Hafif gri */
+  min-height: 50px;
+  text-align: center;
+  font-weight: bold;
+}
